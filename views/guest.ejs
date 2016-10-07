@@ -1,0 +1,155 @@
+
+<!doctype html>
+	<html>
+		<head>
+			<title>저희 결혼합니다!</title>
+			<meta name="viewport" id="vp" content="width=750, user-scalable=no">
+			<link rel="stylesheet" href='/stylesheets/style.css'></link>
+			<script type="text/javascript">
+				var $$ = function(oid){ var res = document.querySelectorAll(oid); return res.length==1?res[0]:res; }
+				var getJson = function(url, cb){
+					var req = new XMLHttpRequest();
+					req.open('GET', url, true);
+					req.onreadystatechange = function(aEvt){
+						if( req.readyState == 4 && req.status == 200 ){
+							var t = req.responseText;
+							if(cb) cb(JSON.parse(t));
+						}
+					}
+					req.send(null);
+				}
+			</script>
+			<meta property="og:title" content="저희 결혼합니다!" />
+			<meta property="og:type" content="website" />
+			<meta property="og:image" content="http://marriage.lazygyu.net/static/images/main.jpg" />
+			<meta property="og:url" content="http://marriage.lazygyu.net" />
+			<meta property="og:description" content="들어오셔서 축하해주세요!" />
+		</head>
+		<body style="background-color:#f6bf2c;">
+		<div id="progressCont"><div id="progressBar"></div></div>
+		<div id="wrapper">
+
+<div id="guestWrapper">
+<div class="accountInfo">
+
+<div class="titleBar">
+	<p class="info"><strong>축하인사</strong> 남기기</p>
+	<a href="/auth/kakao"><img src="/static/images/icons/kakao.png" class="loginBtn" /></a>
+	<a href="/auth/facebook"><img src="/static/images/icons/facebook.png" class="loginBtn" /></a>
+	<a href="/auth/twitter"><img src="/static/images/icons/twitter.png" class="loginBtn" /></a>
+	<a href="/auth/insta"><img src="/static/images/icons/instagram.png" class="loginBtn" /></a>
+	<p>축하 인사를 남기실 계정을 선택해 주세요!</p>
+</div>
+
+
+
+</div>
+
+<div class="writeForm">
+	<textarea id="in_content" name="content" placeholder="로그인 하신 후 축하 인사를 남기실 수 있어요!" disabled="disabled"></textarea>
+	<button class="btn"  disabled="disabled" type="submit">남기기</button>
+</div>
+
+<div id="postList">	
+	<div class="post">
+<span class="accountPictureType"><span class="pictureHolder"><img src="http://graph.facebook.com/759807920818493/picture?type=large" class="authorPicture" /></span><i class="accountType facebook"></i></span>
+<div class="author"><span class="authorName">WoLim Hyun</span><br /><span class="date">2015.10.31 12:05</span></div>
+<p class="postContent">와~ 결혼 축하해!!
+<br />바깥 소식을 접하기 어려워서 인제야 알았네 ㅠ
+<br />앞으로 계속 행복하고 즐거운 일만 가득하기를 바래!
+<br /></p>
+
+</div>
+
+	
+</div>
+
+
+<div class="post" style="text-align:center;" id="moreCont">
+	<button type="button" id="btnMore">더 보기</button>
+</div>
+
+
+</div>
+<script type="test/postTemplate" id="postTemplate">
+<div class="post">
+	<span class="accountPictureType"><span class="pictureHolder"><img src="{{profilePicture}}" class="authorPicture" /></span><i class="accountType {{accountType}}"></i></span>
+	<div class="author"><span class="authorName">{{name}}</span><br /><span class="date">{{date}}</span></div>
+	<p class="postContent">{{content}}</p>
+</div>
+</script>
+<script>
+	var cnt = 10;
+	var hasMore = true;
+	var template = $$("#postTemplate").innerHTML;
+	var listCont = $$("#postList");
+	var dateFormatter = function(d){
+		return d.getFullYear() + "." + ("00" + (d.getMonth()+1)).substr(-2) + "." + ("00" + d.getDate()).substr(-2) + " " + ("00" + d.getHours()).substr(-2) + ":" + ("00" + d.getMinutes()).substr(-2);
+	}
+	function getMore(){
+		$$("#btnMore").disabled = 'disabled';
+		getJson('/guest/' + cnt, function(dat){
+			cnt += dat.list.length;
+			if( !dat.more ){
+				$$("#moreCont").style.display = 'none';
+			}else{
+				$$("#btnMore").removeAttribute('disabled');
+			}
+			var html = [];
+			for(var i=0;i<dat.list.length;i++){
+				var row = dat.list[i];
+				var str = template
+							.replace('{{profilePicture}}', row.profilePicture)
+							.replace('{{name}}', row.name.replace(/</g, '&lt;') )
+							.replace('{{accountType}}', row.accountType)
+							.replace('{{date}}', dateFormatter( new Date(row.date) ) )
+							.replace('{{content}}', row.content.replace(/</g, '&lt;').replace(/\n/g, '<br />') );
+				html.push(
+							str
+						);
+			}
+			
+			listCont.innerHTML += html.join('\n');
+		});
+	}
+	$$("#btnMore").addEventListener('click', getMore);
+</script>
+</div>
+<div id="footer">
+	<a href="http://ttotti.com">또띠</a> &amp; <a href="http://lazygyu.net">규</a> <small>만듦</small>
+</div>
+		<div id="menu">
+			<span class="menuItem menuItem1"><a href="/guest">축하 인사 남기기 <img src="/static/images/icons/guest.png" /></a></span>
+			<span class="menuItem menuItem2"><a href="/photos">사진첩 <img src="/static/images/icons/pictures.png" /></a></span>
+			<span class="menuItem menuItem3"><a href="/profile">신랑신부 소개 <img src="/static/images/icons/info.png" /></a></span>
+			<span class="menuItem menuItem4"><a href="/">처음으로 <img src="/static/images/icons/home.png" /></a></span>
+			<a href="#" id="toggleMenu"></a>
+		</div>
+		<div id="menuBg"></div>
+			<script>
+				var $ = function(oid){ return document.querySelectorAll(oid); }
+
+				var menuCont = $("#menu")[0];
+				var menuBg = $("#menuBg")[0];
+
+				menuBg.addEventListener("click", function(e){
+					if( !this.classList.contains('opened')) return false;
+					$("#toggleMenu")[0].classList.toggle("opened");
+					menuCont.classList.toggle("opened");
+					menuBg.classList.toggle("opened");
+					e.preventDefault();
+					e.stopPropagation();
+					return false;
+				}, false);
+
+				$("#toggleMenu")[0].addEventListener("click", function(e){
+					this.classList.toggle("opened");
+					menuCont.classList.toggle("opened");
+					menuBg.classList.toggle("opened");
+					e.preventDefault();
+					e.stopPropagation();
+					return false;
+				}, false);
+			</script>
+		</body>
+	</html>

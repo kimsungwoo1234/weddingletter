@@ -1,0 +1,105 @@
+
+<!doctype html>
+	<html>
+		<head>
+			<title>저희 결혼합니다!</title>
+			<meta name="viewport" id="vp" content="width=750, user-scalable=no">
+			<link rel="stylesheet" href='/stylesheets/style.css'></link>
+			<script type="text/javascript">
+				var $$ = function(oid){ var res = document.querySelectorAll(oid); return res.length==1?res[0]:res; }
+				var getJson = function(url, cb){
+					var req = new XMLHttpRequest();
+					req.open('GET', url, true);
+					req.onreadystatechange = function(aEvt){
+						if( req.readyState == 4 && req.status == 200 ){
+							var t = req.responseText;
+							if(cb) cb(JSON.parse(t));
+						}
+					}
+					req.send(null);
+				}
+			</script>
+			<meta property="og:title" content="저희 결혼합니다!" />
+			<meta property="og:type" content="website" />
+			<meta property="og:image" content="http://marriage.lazygyu.net/static/images/main.jpg" />
+			<meta property="og:url" content="http://marriage.lazygyu.net" />
+			<meta property="og:description" content="들어오셔서 축하해주세요!" />
+		</head>
+		<body style="background-color:white;">
+		<div id="progressCont"><div id="progressBar"></div></div>
+		<div id="wrapper">
+<style>
+	#photos>img { display:block; margin-bottom:40px; }
+</style>
+<div id="galleryWrapper">
+	<div class="titleBar">
+		<p class="info"><strong>사진첩</strong></p>
+	</div>
+	<div id="photos">
+		<img src="/static/images/photos/01.JPG" />
+		<img src="/static/images/photos/02.JPG" />
+		<img src="/static/images/photos/03.JPG" />
+		<img src="/static/images/photos/04.JPG" />
+		<img src="/static/images/photos/05.JPG" />
+		<img src="/static/images/photos/06.JPG" />
+		
+		<img src="/static/images/photos/19.jpg" alt="">
+		<img src="/static/images/photos/20.jpg" alt="">
+		<img src="/static/images/photos/21.jpg" alt="">
+		<img src="/static/images/photos/22.jpg" alt="">
+		<img src="/static/images/photos/23.jpg" alt="">
+		<img src="/static/images/photos/24.jpg" alt="">
+
+
+		<img src="/static/images/photos/07.JPG" />
+		<img src="/static/images/photos/08.JPG" />
+		<img src="/static/images/photos/09.JPG" />
+		<img src="/static/images/photos/10.JPG" />
+		<img src="/static/images/photos/11.JPG" />
+		<img src="/static/images/photos/12.JPG" />
+		<img src="/static/images/photos/13.JPG" />
+		<img src="/static/images/photos/14.JPG" />
+		<img src="/static/images/photos/15.JPG" />
+		<img src="/static/images/photos/16.JPG" />
+		<img src="/static/images/photos/17.JPG" />
+	</div>
+</div>
+</div>
+<div id="footer">
+	<a href="http://ttotti.com">또띠</a> &amp; <a href="http://lazygyu.net">규</a> <small>만듦</small>
+</div>
+		<div id="menu">
+			<span class="menuItem menuItem1"><a href="/guest">축하 인사 남기기 <img src="/static/images/icons/guest.png" /></a></span>
+			<span class="menuItem menuItem2"><a href="/photos">사진첩 <img src="/static/images/icons/pictures.png" /></a></span>
+			<span class="menuItem menuItem3"><a href="/profile">신랑신부 소개 <img src="/static/images/icons/info.png" /></a></span>
+			<span class="menuItem menuItem4"><a href="/">처음으로 <img src="/static/images/icons/home.png" /></a></span>
+			<a href="#" id="toggleMenu"></a>
+		</div>
+		<div id="menuBg"></div>
+			<script>
+				var $ = function(oid){ return document.querySelectorAll(oid); }
+
+				var menuCont = $("#menu")[0];
+				var menuBg = $("#menuBg")[0];
+
+				menuBg.addEventListener("click", function(e){
+					if( !this.classList.contains('opened')) return false;
+					$("#toggleMenu")[0].classList.toggle("opened");
+					menuCont.classList.toggle("opened");
+					menuBg.classList.toggle("opened");
+					e.preventDefault();
+					e.stopPropagation();
+					return false;
+				}, false);
+
+				$("#toggleMenu")[0].addEventListener("click", function(e){
+					this.classList.toggle("opened");
+					menuCont.classList.toggle("opened");
+					menuBg.classList.toggle("opened");
+					e.preventDefault();
+					e.stopPropagation();
+					return false;
+				}, false);
+			</script>
+		</body>
+	</html>
