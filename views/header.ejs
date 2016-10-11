@@ -1,0 +1,24 @@
+<head>
+	<title>저희 결혼합니다!</title>
+	<meta name="viewport" id="vp" content="width=750, user-scalable=no">
+	<link rel="stylesheet" href='/stylesheets/style.css'></link>
+	<script type="text/javascript">
+		var $$ = function(oid){ var res = document.querySelectorAll(oid); return res.length==1?res[0]:res; }
+		var getJson = function(url, cb){
+			var req = new XMLHttpRequest();
+			req.open('GET', url, true);
+			req.onreadystatechange = function(aEvt){
+				if( req.readyState == 4 && req.status == 200 ){
+					var t = req.responseText;
+					if(cb) cb(JSON.parse(t));
+				}
+			}
+			req.send(null);
+		}
+	</script>
+	<meta property="og:title" content="저희 결혼합니다!" />
+	<meta property="og:type" content="website" />
+	<meta property="og:image" content="http://marriage.lazygyu.net/static/images/main.jpg" />
+	<meta property="og:url" content="http://marriage.lazygyu.net" />
+	<meta property="og:description" content="들어오셔서 축하해주세요!" />
+</head>

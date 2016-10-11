@@ -1,0 +1,36 @@
+<div id="footer">
+	신랑 성우 <small>만듦</small>
+</div>
+<div id="menu">
+	<span class="menuItem menuItem1"><a href="/guest">축하 인사 남기기 <img src="/images/icons/guest.png" /></a></span>
+	<span class="menuItem menuItem2"><a href="/photo">사진첩 <img src="/images/icons/pictures.png" /></a></span>
+	<span class="menuItem menuItem3"><a href="/profile">신랑신부 소개 <img src="/images/icons/info.png" /></a></span>
+	<span class="menuItem menuItem4"><a href="/">처음으로 <img src="/images/icons/home.png" /></a></span>
+	<a href="#" id="toggleMenu"></a>
+</div>
+<div id="menuBg"></div>
+<script>
+				var $ = function(oid){ return document.querySelectorAll(oid); }
+
+				var menuCont = $("#menu")[0];
+				var menuBg = $("#menuBg")[0];
+
+				menuBg.addEventListener("click", function(e){
+					if( !this.classList.contains('opened')) return false;
+					$("#toggleMenu")[0].classList.toggle("opened");
+					menuCont.classList.toggle("opened");
+					menuBg.classList.toggle("opened");
+					e.preventDefault();
+					e.stopPropagation();
+					return false;
+				}, false);
+
+				$("#toggleMenu")[0].addEventListener("click", function(e){
+					this.classList.toggle("opened");
+					menuCont.classList.toggle("opened");
+					menuBg.classList.toggle("opened");
+					e.preventDefault();
+					e.stopPropagation();
+					return false;
+				}, false);
+			</script>

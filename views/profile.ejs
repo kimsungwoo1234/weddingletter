@@ -1,127 +1,167 @@
-
 <!doctype html>
-	<html>
-		<head>
-			<title>저희 결혼합니다!</title>
-			<meta name="viewport" id="vp" content="width=750, user-scalable=no">
-			<link rel="stylesheet" href='/stylesheets/style.css'></link>
-			<script type="text/javascript">
-				var $$ = function(oid){ var res = document.querySelectorAll(oid); return res.length==1?res[0]:res; }
-				var getJson = function(url, cb){
-					var req = new XMLHttpRequest();
-					req.open('GET', url, true);
-					req.onreadystatechange = function(aEvt){
-						if( req.readyState == 4 && req.status == 200 ){
-							var t = req.responseText;
-							if(cb) cb(JSON.parse(t));
-						}
-					}
-					req.send(null);
-				}
-			</script>
-			<meta property="og:title" content="저희 결혼합니다!" />
-			<meta property="og:type" content="website" />
-			<meta property="og:image" content="http://marriage.lazygyu.net/static/images/main.jpg" />
-			<meta property="og:url" content="http://marriage.lazygyu.net" />
-			<meta property="og:description" content="들어오셔서 축하해주세요!" />
-		</head>
-		<body style="background-color:#369;">
-		<div id="progressCont"><div id="progressBar"></div></div>
-		<div id="wrapper">
-<div style="width:100%; height:0px;">&nbsp;</div>
-<script src="/static/js/d3.min.js"></script>
-<style>
-
-</style>
-<div id="profileWrapper">
-<div class="titleBar">
-	<p class="info"><span id="littleTitle"></span></p>
-</div>
-<div class="viewPort step0">
-<div class="steps"></div>
-<div id="initial" class="steps">
-	<div id="ttotti_intro"><img src="/static/images/icons/l_ttotti.jpg" /><br />또띠</div>
-	<div id="gyu_intro"><img src="/static/images/icons/l_gyu.jpg" /><br />규</div>
-	<div id="ttotti_detail">
-		<span>김소연</span>
-		<span>1994.06.14</span>
-		<span>웹디자이너</span>
+<html>
+<%- include('header') %>
+<body style="background-color:#369;">
+	<div id="progressCont">
+		<div id="progressBar"></div>
 	</div>
-	<div id="gyu_detail">
-		<span>엄태규</span>
-		<span>1986.05.02</span>
-		<span>프로그래머</span>
-	</div>
-	<img id="heart" src="/static/images/icons/info.png">
-</div>
-<div id="keywordContainer" class="steps"></div>
-<div id="qna" class="steps" style="overflow:hidden;">
-	<div id="qnaContent" style="transition:all .4s ease-out;">
-		<p class="ask question active">어떻게 만나게 되셨나요?</p>
-		<div class="ask gyu"><p>제가 다니는 회사에 또띠가 어느날 나타났어요!</p></div>
-		<div class="ask ttotti"><p>어쩌다가 블로그 댓글로 연락이 시작되어서<br />제가 먼저 아이스티를 먹자 했어요.</p></div>
-		<div class="ask gyu"><p>네 그래서 얻어 먹었어요.</p></div>
+	<div id="wrapper">
+		<div style="width:100%; height:0px;">&nbsp;</div>
+		<script src="/javascripts/d3.min.js"></script>
+		<style>
 
-		<p class="ask question">상대의 어디가 가장 매력적인가요?</p>
-		<div class="ask ttotti"><p>태규에게 누누히 말하지만 머리 끝부터<br />발 끝까지 다 내 스타일이야!</p></div>
-		<div class="ask gyu"><p>아이스티 마시면서 처음으로<br />웃는 모습을 봤는데 너무 예뻤어요!</p></div>
-		<div class="ask ttotti"><p>뭐든 뚝딱 만들어내는 잉여력이 너무 좋아요!</p></div>
-		<div class="ask gyu"><p>센스있고 의외로 재밌는 면도 좋구요!</p></div>
+		</style>
+		<div id="profileWrapper">
+			<div class="titleBar">
+				<p class="info"><span id="littleTitle"></span></p>
+			</div>
+			<div class="viewPort step0">
+				<div class="steps"></div>
+				<div id="initial" class="steps">
+					<div id="ttotti_intro"><img src="/images/icons/l_ttotti.jpg" /><br />또띠</div>
+					<div id="gyu_intro"><img src="/images/icons/l_gyu.jpg" /><br />규</div>
+					<div id="ttotti_detail">
+						<span>김유진</span>
+						<span>1991.08.21</span>
+						<span>포워더</span>
+					</div>
+					<div id="gyu_detail">
+						<span>김성우</span>
+						<span>1985.12.23</span>
+						<span>프로그래머</span>
+					</div>
+					<img id="heart" src="/images/icons/info.png">
+				</div>
+				<div id="keywordContainer" class="steps"></div>
+				<div id="qna" class="steps" style="overflow:hidden;">
+					<div id="qnaContent" style="transition:all .4s ease-out;">
+						<p class="ask question active">어떻게 만나게 되셨나요?</p>
+						<div class="ask gyu">
+							<p>제가 다니는 회사에 또띠가 어느날 나타났어요!</p>
+						</div>
+						<div class="ask ttotti">
+							<p>어쩌다가 블로그 댓글로 연락이 시작되어서<br />제가 먼저 아이스티를 먹자 했어요.</p>
+						</div>
+						<div class="ask gyu">
+							<p>네 그래서 얻어 먹었어요.</p>
+						</div>
 
-		<p class="ask question">서로 결혼을 결심하게 된 계기는 무엇인가요?</p>
-		<div class="ask gyu"><p>서로 사고방식이 비슷하다 보니<br />의견 충돌이 적어서 좋았어요.</p></div>
-		<div class="ask gyu"><p>자기가 싫고 못하는 걸 상대에게<br />요구하지 않는 이해심이 특히 좋아요.</p></div>
-		<div class="ask ttotti"><p>태규가 너무 좋다->매일 헤어지고 싶지 않다->같이 살고 싶다->같이 살까?->결혼하자!</p></div>
-		<div class="ask gyu"><p>취향도 신기할정도로 비슷하구요.<br />윗도리 바지에 넣는 거 빼고.</p></div>
-		<div class="ask ttotti"><p>앞으로 싸울 일이 있다면 언제나 내 잘못일거란 생각이 들 정도로 태규 성격이 좋아요!</p></div>
-		<div class="ask ttotti">
-			<p>말보단 행동이라 항상 신뢰할 수 있었고, 쭉 함께있으면 배울 수 있는 게 많을거라 느꼈어요!</p>
+						<p class="ask question">상대의 어디가 가장 매력적인가요?</p>
+						<div class="ask ttotti">
+							<p>태규에게 누누히 말하지만 머리 끝부터<br />발 끝까지 다 내 스타일이야!</p>
+						</div>
+						<div class="ask gyu">
+							<p>아이스티 마시면서 처음으로<br />웃는 모습을 봤는데 너무 예뻤어요!</p>
+						</div>
+						<div class="ask ttotti">
+							<p>뭐든 뚝딱 만들어내는 잉여력이 너무 좋아요!</p>
+						</div>
+						<div class="ask gyu">
+							<p>센스있고 의외로 재밌는 면도 좋구요!</p>
+						</div>
+
+						<p class="ask question">서로 결혼을 결심하게 된 계기는 무엇인가요?</p>
+						<div class="ask gyu">
+							<p>서로 사고방식이 비슷하다 보니<br />의견 충돌이 적어서 좋았어요.</p>
+						</div>
+						<div class="ask gyu">
+							<p>자기가 싫고 못하는 걸 상대에게<br />요구하지 않는 이해심이 특히 좋아요.</p>
+						</div>
+						<div class="ask ttotti">
+							<p>태규가 너무 좋다->매일 헤어지고 싶지 않다->같이 살고 싶다->같이 살까?->결혼하자!</p>
+						</div>
+						<div class="ask gyu">
+							<p>취향도 신기할정도로 비슷하구요.<br />윗도리 바지에 넣는 거 빼고.</p>
+						</div>
+						<div class="ask ttotti">
+							<p>앞으로 싸울 일이 있다면 언제나 내 잘못일거란 생각이 들 정도로 태규 성격이 좋아요!</p>
+						</div>
+						<div class="ask ttotti">
+							<p>말보단 행동이라 항상 신뢰할 수 있었고, 쭉 함께있으면 배울 수 있는 게 많을거라 느꼈어요!</p>
+						</div>
+
+
+						<p class="ask question">프로포즈는 누가 어떻게?</p>
+						<div class="ask gyu">
+							<p>자연스럽게 당연히 어느 순간부터 결혼하기로 결정한 것 같아요. 특별히 기억나는 건 없는데..</p>
+						</div>
+						<div class="ask ttotti">
+							<p>잘 모르겠어요!! 그냥 결혼하기로 했어용</p>
+						</div>
+
+						<p class="ask question">신혼여행은 어디로 가나요?</p>
+						<div class="ask gyu">
+							<p>괌 괌.</p>
+						</div>
+						<div class="ask ttotti">
+							<p>괌 괌.</p>
+						</div>
+
+						<p class="ask question">결혼식에 왜 초대를 안하시나요?</p>
+						<div class="ask gyu">
+							<p>개인적으로 남의 결혼식 가는 게 그렇게 즐거운 경험이 아니더라구요.</p>
+						</div>
+						<div class="ask gyu">
+							<p>제가 싫은 건 남도 싫을 것 같아요.</p>
+						</div>
+						<div class="ask ttotti">
+							<p>사람 많은 것도 어려운데, 그 중심에 제가 선다는 게 생각만으로도 너무 어렵고 괴로울 것 같ㅇ..</p>
+						</div>
+						<div class="ask gyu">
+							<p>그래서 소박하게 가족끼리 하려고 해요.</p>
+						</div>
+
+						<p class="ask question">그럼 축의금도 안 받으시겠네요?</p>
+						<div class="ask ttotti">
+							<p>마음만으로도 감사하져<br />축하 인사 써주세염!!</p>
+						</div>
+						<div class="ask gyu">
+							<p>우리은행 1002-541-122..</p>
+						</div>
+						<div class="ask ttotti">
+							<p>...905.</p>
+						</div>
+						<div class="ask gyu">
+							<p><span style='font-family:arial; margin:0;'>( ͡° ͜ʖ ͡°)</span> 넝담~ㅎ</p>
+						</div>
+
+						<p class="ask question">자녀 계획은? 혹시 속도위반?!</p>
+						<div class="ask ttotti">
+							<p>속도위반은 아니고요. 아직은 계획이 없어요.<br />몇 년 더 생각해보려고 해요.</p>
+						</div>
+						<div class="ask gyu">
+							<p>딸! 딸 낳을거에요! 이름도 지어놨음!</p>
+						</div>
+						<div class="ask ttotti">
+							<p>딸이 최고에요!</p>
+						</div>
+
+						<p class="ask question">마지막으로 여러분들께 한마디!</p>
+						<div class="ask gyu">
+							<p>초대 못 드린 점 죄송하구요. 행복하게 잘 사는 모습으로 보답하겠습니다.</p>
+						</div>
+						<div class="ask gyu">
+							<p>여러분들도 사는 날 까지 행복하게 사세요.</p>
+						</div>
+						<div class="ask ttotti">
+							<p>나름 열심히 준비했는데 재밌게 보셨으면 좋겠네요.</p>
+						</div>
+						<div class="ask ttotti">
+							<p>안 궁금해하셔도 행복하고 즐겁게 지내는 모습 보여드리도록 할게요!</p>
+						</div>
+
+					</div>
+					<!--div id="indicator" style="width:100%; height:1px; border:none; border-top:solid 1px red; position:absolute; top:0;"></div-->
+				</div>
+				<div id="outro" class="steps">
+					<div id="bye"></div>
+					<div id="outro_text">감사합니다!</div>
+				</div>
+			</div>
+			<button id="btnNext">다음</button>
+			<button id="btnAsk">다음</button>
 		</div>
-
-
-		<p class="ask question">프로포즈는 누가 어떻게?</p>
-		<div class="ask gyu"><p>자연스럽게 당연히 어느 순간부터 결혼하기로 결정한 것 같아요. 특별히 기억나는 건 없는데..</p></div>
-		<div class="ask ttotti"><p>잘 모르겠어요!! 그냥 결혼하기로 했어용</p></div>
-
-		<p class="ask question">신혼여행은 어디로 가나요?</p>
-		<div class="ask gyu"><p>괌 괌.</p></div>
-		<div class="ask ttotti"><p>괌 괌.</p></div>
-
-		<p class="ask question">결혼식에 왜 초대를 안하시나요?</p>
-		<div class="ask gyu"><p>개인적으로 남의 결혼식 가는 게 그렇게 즐거운 경험이 아니더라구요.</p></div>
-		<div class="ask gyu"><p>제가 싫은 건 남도 싫을 것 같아요.</p></div>
-		<div class="ask ttotti"><p>사람 많은 것도 어려운데, 그 중심에 제가 선다는 게 생각만으로도 너무 어렵고 괴로울 것 같ㅇ..</p></div>
-		<div class="ask gyu"><p>그래서 소박하게 가족끼리 하려고 해요.</p></div>
-
-		<p class="ask question">그럼 축의금도 안 받으시겠네요?</p>
-		<div class="ask ttotti"><p>마음만으로도 감사하져<br />축하 인사 써주세염!!</p></div>
-		<div class="ask gyu"><p>우리은행 1002-541-122..</p></div>
-		<div class="ask ttotti"><p>...905.</p></div>
-		<div class="ask gyu"><p><span style='font-family:arial; margin:0;'>( ͡° ͜ʖ ͡°)</span> 넝담~ㅎ</p></div>
-
-		<p class="ask question">자녀 계획은? 혹시 속도위반?!</p>
-		<div class="ask ttotti"><p>속도위반은 아니고요. 아직은 계획이 없어요.<br />몇 년 더 생각해보려고 해요.</p></div>
-		<div class="ask gyu"><p>딸! 딸 낳을거에요! 이름도 지어놨음!</p></div>
-		<div class="ask ttotti"><p>딸이 최고에요!</p></div>
-
-		<p class="ask question">마지막으로 여러분들께 한마디!</p>
-		<div class="ask gyu"><p>초대 못 드린 점 죄송하구요. 행복하게 잘 사는 모습으로 보답하겠습니다.</p></div>
-		<div class="ask gyu"><p>여러분들도 사는 날 까지 행복하게 사세요.</p></div>
-		<div class="ask ttotti"><p>나름 열심히 준비했는데 재밌게 보셨으면 좋겠네요.</p></div>
-		<div class="ask ttotti"><p>안 궁금해하셔도 행복하고 즐겁게 지내는 모습 보여드리도록 할게요!</p></div>
-		
-	</div>
-	<!--div id="indicator" style="width:100%; height:1px; border:none; border-top:solid 1px red; position:absolute; top:0;"></div-->
-</div>
-<div id="outro" class="steps">
-	<div id="bye"></div>
-	<div id="outro_text">감사합니다!</div>
-</div>
-</div>
-<button id="btnNext">다음</button>
-<button id="btnAsk">다음</button>
-</div>
-<script>
+		<script>
 	window.addEventListener('load', function(){
 		var stepTitles = [
 			'<span><strong>우리</strong>는</span>',
@@ -175,10 +215,6 @@
 			var ended = function(){ el.style.display = "none"; el.removeEventListener('transitionend', ended); };
 			el.addEventListener('transitionend', ended);
 		}
-
-		
-		
-
 
 
 		var cont = d3.select("#keywordContainer")
@@ -269,42 +305,8 @@
 		turnNext();
 	});
 </script>
-</div>
-<div id="footer">
-	<a href="http://ttotti.com">또띠</a> &amp; <a href="http://lazygyu.net">규</a> <small>만듦</small>
-</div>
-		<div id="menu">
-			<span class="menuItem menuItem1"><a href="/guest">축하 인사 남기기 <img src="/static/images/icons/guest.png" /></a></span>
-			<span class="menuItem menuItem2"><a href="/photos">사진첩 <img src="/static/images/icons/pictures.png" /></a></span>
-			<span class="menuItem menuItem3"><a href="/profile">신랑신부 소개 <img src="/static/images/icons/info.png" /></a></span>
-			<span class="menuItem menuItem4"><a href="/">처음으로 <img src="/static/images/icons/home.png" /></a></span>
-			<a href="#" id="toggleMenu"></a>
-		</div>
-		<div id="menuBg"></div>
-			<script>
-				var $ = function(oid){ return document.querySelectorAll(oid); }
+	</div>
+	<%- include('footer') %>
+</body>
 
-				var menuCont = $("#menu")[0];
-				var menuBg = $("#menuBg")[0];
-
-				menuBg.addEventListener("click", function(e){
-					if( !this.classList.contains('opened')) return false;
-					$("#toggleMenu")[0].classList.toggle("opened");
-					menuCont.classList.toggle("opened");
-					menuBg.classList.toggle("opened");
-					e.preventDefault();
-					e.stopPropagation();
-					return false;
-				}, false);
-
-				$("#toggleMenu")[0].addEventListener("click", function(e){
-					this.classList.toggle("opened");
-					menuCont.classList.toggle("opened");
-					menuBg.classList.toggle("opened");
-					e.preventDefault();
-					e.stopPropagation();
-					return false;
-				}, false);
-			</script>
-		</body>
-	</html>
+</html>

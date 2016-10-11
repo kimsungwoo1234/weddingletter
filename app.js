@@ -6,11 +6,10 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
+var guest = require('./routes/guest');
 
+var mongoose    = require('mongoose');
 var app = express();
-
-
 
 
 // view engine setup
@@ -21,13 +20,12 @@ app.set('view engine', 'ejs');
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/users', users);
+app.use('/guest', guest);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -68,6 +66,16 @@ var server = app.listen(3000, function(){
     console.log("Express server has started on port 3000")
 });
 
+
+// CONNECT TO MONGODB SERVER
+var db = mongoose.connection;
+db.on('error', console.error);
+db.once('open', function(){
+    // CONNECTED TO MONGODB SERVER
+    console.log("Connected to mongod server");
+});
+ 
+mongoose.connect('mongodb://localhost/mongodb_tutorial');
 
 
 module.exports = app;
